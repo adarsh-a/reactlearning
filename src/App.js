@@ -1,26 +1,48 @@
-import React from 'react';
+import React,{Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import UserInput from './UserInteraction/UserInput';
+import UserOutput from './UserInteraction/UserOutput';
 
-function App() {
+
+class App extends Component {
+
+  state=({
+    users:[
+      {username:"John Wick",job:"Assasin"},
+      {username:"Hagrid",job:"Gatekeeper"}]
+    
+  });
+
+  changeUser=(event)=>
+  {
+    this.setState({
+      users:[
+        {username:event.target.value,job:"Assasin"},
+        {username:"Hagrid",job:"Gatekeeper"}]
+      });
+  }
+
+  render(){
+    const style=
+    {
+      backgroundColor:"LightGrey",
+      width:"400px",
+      margin:"10px auto",
+      padding: "10px 10px 10px 10px",
+      font:"inherit"
+    }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" style={style}>
+      <div>
+      This is the first assignment
+      </div>
+      <UserInput change={this.changeUser} username={this.state.users[0].username}/>
+      <UserOutput username={this.state.users[0].username} job={this.state.users[0].job}/>
+      <UserOutput username={this.state.users[1].username} job={this.state.users[1].job}/>
     </div>
   );
+}
 }
 
 export default App;
